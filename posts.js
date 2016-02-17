@@ -1,9 +1,10 @@
 Shuttle.Posts = new Mongo.Collection('shuttle:posts');
 
-Shuttle.Posts.attachRefs();
+if (Meteor.isServer) Shuttle.Unused.watch(Shuttle.Posts);
 
-if (Meteor.isServer)
-	Shuttle.Posts.attachUnused();
+if (Meteor.isServer) Shuttle.Fetching.secureCollection(Shuttle.Posts, '_fetching');
+
+Shuttle.Posts.attachSchema({ _inserted: { type: insertedSchema() } });
 
 Shuttle.Posts.attachSchema(new SimpleSchema({
 	title: {
@@ -14,24 +15,6 @@ Shuttle.Posts.attachSchema(new SimpleSchema({
 	body: {
 		type: String,
 		optional: true,
-		defaultValue: '',
-		autoform: {
-			type: 'summernote',
-			settings: {
-				height: 150
-			}
-		}
+		defaultValue: ''
 	}
 }));
-
-Shuttle.Posts.attachSchema(Shuttle.insertedSchema);
-
-if (Meteor.isServer) 
-	Shuttle.Posts.attachSecure(Shuttle.Fetching, '__fetching');
-
-Shuttle.Posts.attachSchema({
-	__fetching: {
-		type: [Refs.Schema],
-		optional: true
-	}
-});
