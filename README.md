@@ -1,4 +1,4 @@
-# ShuttlePosts
+# ~~ShuttlePosts~~ DEPRECATED
 
 ```
 meteor add ivansglazunov:shuttle-posts

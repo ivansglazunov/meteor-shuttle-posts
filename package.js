@@ -1,7 +1,7 @@
 Package.describe({
   name: 'ivansglazunov:shuttle-posts',
-  version: '0.0.2',
-  summary: 'Universal container for content.',
+  version: '0.0.3',
+  summary: 'DEPRECATED',
   git: 'https://github.com/ivansglazunov/meteor-shuttle-posts.git',
   documentation: 'README.md'
 });
